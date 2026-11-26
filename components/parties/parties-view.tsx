@@ -96,7 +96,7 @@ function buildColumns(kind: Kind): ColumnDef<PartyRow>[] {
       header: "Last order",
       cell: ({ getValue }) => {
         const v = getValue<string | undefined>();
-        return <span className="text-muted-foreground">{v ? formatDate(v) : "—"}</span>;
+        return <span className="whitespace-nowrap text-muted-foreground">{v ? formatDate(v) : "—"}</span>;
       },
       sortUndefined: "last",
       meta: { align: "right", className: "hidden md:table-cell" },

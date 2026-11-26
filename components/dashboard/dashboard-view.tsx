@@ -79,7 +79,7 @@ function Dashboard() {
         }
       />
       <PageBody>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
           <KpiCard
             label="Total items"
             icon={Boxes}
@@ -159,7 +159,7 @@ function DashboardSkeleton() {
     <>
       <PageHeader title="Dashboard" description="Loading your workspace…" />
       <PageBody>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4" aria-busy="true" aria-label="Loading">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4" aria-busy="true" aria-label="Loading">
           {Array.from({ length: 4 }, (_, i) => (
             <Skeleton key={i} className="h-[124px] rounded-xl" />
           ))}

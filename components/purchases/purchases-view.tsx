@@ -30,7 +30,7 @@ const columns: ColumnDef<PurchaseRow>[] = [
   {
     accessorKey: "number",
     header: "PO no.",
-    cell: ({ getValue }) => <span className="font-mono text-[13px] font-medium">{getValue<string>()}</span>,
+    cell: ({ getValue }) => <span className="font-mono text-[13px] font-medium whitespace-nowrap">{getValue<string>()}</span>,
   },
   {
     accessorKey: "supplierName",
@@ -40,7 +40,7 @@ const columns: ColumnDef<PurchaseRow>[] = [
   {
     accessorKey: "date",
     header: "Date",
-    cell: ({ getValue }) => <span className="num text-muted-foreground">{formatDate(getValue<string>())}</span>,
+    cell: ({ getValue }) => <span className="num whitespace-nowrap text-muted-foreground">{formatDate(getValue<string>())}</span>,
     enableGlobalFilter: false,
     meta: { className: "hidden md:table-cell" },
   },
