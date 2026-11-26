@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { PageBody, PageHeader } from "@/components/shared/page-header";
+import { Suspense } from "react";
+import { PurchasesView } from "@/components/purchases/purchases-view";
 
 export const metadata: Metadata = { title: "Purchases" };
 
-export default function Page() {
+export default function PurchasesPage() {
   return (
-    <>
-      <PageHeader title="Purchases" description="Purchase orders from suppliers" />
-      <PageBody>{null}</PageBody>
-    </>
+    <Suspense>
+      <PurchasesView />
+    </Suspense>
   );
 }
