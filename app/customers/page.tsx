@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { PageBody, PageHeader } from "@/components/shared/page-header";
+import { PartiesView } from "@/components/parties/parties-view";
 
 export const metadata: Metadata = { title: "Customers" };
 
-export default function Page() {
-  return (
-    <>
-      <PageHeader title="Customers" description="People and businesses you sell to" />
-      <PageBody>{null}</PageBody>
-    </>
-  );
+export default function CustomersPage() {
+  return <PartiesView kind="customer" />;
 }

@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { PageBody, PageHeader } from "@/components/shared/page-header";
+import { PartiesView } from "@/components/parties/parties-view";
 
 export const metadata: Metadata = { title: "Suppliers" };
 
-export default function Page() {
-  return (
-    <>
-      <PageHeader title="Suppliers" description="Vendors you purchase from" />
-      <PageBody>{null}</PageBody>
-    </>
-  );
+export default function SuppliersPage() {
+  return <PartiesView kind="supplier" />;
 }
