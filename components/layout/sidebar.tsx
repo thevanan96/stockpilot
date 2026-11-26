@@ -7,6 +7,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Kbd } from "@/components/shared/kbd";
 import { LogoMark } from "@/components/layout/logo";
 import { ThemeCycleButton, ThemeToggle } from "@/components/layout/theme-toggle";
+import { ResetDemoButton } from "@/components/layout/reset-demo-button";
+import { useNavBadges } from "@/components/layout/use-nav-badges";
 import { NAV_SECTIONS, isActivePath, type NavItem } from "@/lib/nav";
 import { useUiStore } from "@/store/ui-store";
 import { cn } from "@/lib/utils";
@@ -23,7 +25,7 @@ export function SidebarContent({ rail = false, onNavigate, showCollapseToggle }:
   const pathname = usePathname();
   const setCommandOpen = useUiStore((s) => s.setCommandOpen);
   const toggleSidebar = useUiStore((s) => s.toggleSidebar);
-  const badges: Partial<Record<NonNullable<NavItem["badge"]>, number>> = {};
+  const badges = useNavBadges();
 
   return (
     <div className="flex h-full flex-col gap-4 px-3 py-3">
@@ -105,6 +107,7 @@ export function SidebarContent({ rail = false, onNavigate, showCollapseToggle }:
 
       {/* Footer */}
       <div className={cn("flex flex-col gap-2 border-t border-sidebar-border pt-3", rail && "items-center")}>
+        <ResetDemoButton rail={rail} />
         {rail ? <ThemeCycleButton /> : <ThemeToggle />}
         {showCollapseToggle && rail && (
           <RailTooltip label="Expand sidebar" enabled>
