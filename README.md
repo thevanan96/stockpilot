@@ -2,7 +2,7 @@
 
 **A calm, modern inventory workspace**: stock, purchasing, sales and reports in one connected flow.
 
-**Live demo:** https://stockpilot-woad-three.vercel.app
+**Live demo:** https://stockpilot-woad-three.vercel.app · **Source:** https://github.com/thevanan96/stockpilot
 
 StockPilot is a front-end-only demo built as a trial task. Every quantity in the app comes from a single **stock ledger**. Receiving a purchase order or fulfilling an invoice writes ledger entries, and the dashboard, low-stock alerts, item history and reports are all derived from those entries. No login is needed: the app opens on a realistic six-month sample workspace stored in your browser.
 
