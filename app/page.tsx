@@ -1,10 +1,5 @@
-import { PageBody, PageHeader } from "@/components/shared/page-header";
+import { DashboardView } from "@/components/dashboard/dashboard-view";
 
 export default function DashboardPage() {
-  return (
-    <>
-      <PageHeader title="Dashboard" description="A live overview of stock, sales and purchasing" />
-      <PageBody>{null}</PageBody>
-    </>
-  );
+  return <DashboardView />;
 }

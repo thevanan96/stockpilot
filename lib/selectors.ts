@@ -94,7 +94,7 @@ export interface Kpis {
   stockValue: number;
   stockValueChange: number | null;
   openSales: { count: number; value: number; drafts: number; confirmed: number };
-  pendingPurchases: { count: number; value: number; nextExpected?: string };
+  pendingPurchases: { count: number; value: number; overdue: number; nextExpected?: string };
   lowStockCount: number;
   outOfStockCount: number;
 }
@@ -106,10 +106,9 @@ export const selectKpis = memoize(
     const monthAgo = stockValueAt(items, movements, subDays(new Date(), 30));
     const open = sales.filter((s) => s.status === "draft" || s.status === "confirmed");
     const pending = purchases.filter((p) => p.status === "pending");
-    const nextExpected = pending
-      .map((p) => p.expectedDate)
-      .filter((d): d is string => Boolean(d))
-      .sort()[0];
+    const nowIso = new Date().toISOString();
+    const expected = pending.map((p) => p.expectedDate).filter((d): d is string => Boolean(d));
+    const nextExpected = expected.filter((d) => d >= nowIso).sort()[0];
 
     return {
       totalItems: items.length,
@@ -125,6 +124,7 @@ export const selectKpis = memoize(
       pendingPurchases: {
         count: pending.length,
         value: pending.reduce((s, p) => s + docTotal(p.lines), 0),
+        overdue: expected.filter((d) => d < nowIso).length,
         nextExpected,
       },
       lowStockCount: stock.filter((i) => i.status === "low").length,
@@ -166,6 +166,28 @@ export const selectMonthlyTotals = memoize(
     return buckets;
   },
 );
+
+export interface CategoryValue {
+  category: Item["category"];
+  value: number;
+  units: number;
+  share: number;
+}
+
+/** Stock value at cost per category, largest first. */
+export const selectStockByCategory = memoize((items: Item[], movements: StockMovement[]): CategoryValue[] => {
+  const totals = new Map<Item["category"], { value: number; units: number }>();
+  for (const i of selectItemsWithStock(items, movements)) {
+    const t = totals.get(i.category) ?? { value: 0, units: 0 };
+    t.value += i.stockValue;
+    t.units += i.quantity;
+    totals.set(i.category, t);
+  }
+  const grand = [...totals.values()].reduce((s, t) => s + t.value, 0) || 1;
+  return [...totals.entries()]
+    .map(([category, t]) => ({ category, ...t, share: t.value / grand }))
+    .sort((a, b) => b.value - a.value);
+});
 
 /* --------------------------- Activity feed -------------------------- */
 

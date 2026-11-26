@@ -165,7 +165,8 @@ export function createSeedData(now: Date = new Date()): InventoryData {
       number: docNumber("PO", i + 1),
       supplierId: suppliers[sup].id,
       date,
-      expectedDate: plus(date, 5, 12),
+      // Expected dates may lie in the future, so they are not clamped to "now".
+      expectedDate: setHours(addDays(new Date(date), 5), 12).toISOString(),
       status,
       lines: toLines(spec, "costPrice"),
       createdAt: date,
