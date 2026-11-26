@@ -68,7 +68,8 @@ export function Combobox({
         align="start"
         className={cn("w-(--radix-popover-trigger-width) min-w-72 p-0 shadow-overlay", contentClassName)}
       >
-        <Command>
+        {/* Plain substring match: predictable for names and SKUs. */}
+        <Command filter={(value, search) => (value.toLowerCase().includes(search.trim().toLowerCase()) ? 1 : 0)}>
           <CommandInput placeholder={searchPlaceholder} />
           <CommandList className="scrollbar-thin max-h-72">
             <CommandEmpty>{emptyText}</CommandEmpty>

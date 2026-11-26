@@ -11,7 +11,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <TooltipProvider delayDuration={200}>
         <StoreHydrator />
         {children}
-        <Toaster position="bottom-right" closeButton />
+        <Toaster position="top-center" closeButton />
       </TooltipProvider>
     </ThemeProvider>
   );
