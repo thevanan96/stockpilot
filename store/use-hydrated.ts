@@ -17,7 +17,11 @@ export function useHydrated() {
 /** Mount once near the root: loads persisted data after the first client render. */
 export function StoreHydrator() {
   useEffect(() => {
-    void useInventoryStore.persist.rehydrate();
+    const { persist } = useInventoryStore;
+    void Promise.resolve(persist.rehydrate()).then(() => {
+      // First visit: write the freshly generated demo so it stays stable across reloads.
+      if (localStorage.getItem(persist.getOptions().name ?? "") === null) useInventoryStore.setState({});
+    });
   }, []);
   return null;
 }
