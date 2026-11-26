@@ -113,7 +113,7 @@ function Reports() {
           <>
             <DateRangePicker value={range} onChange={setRange} presets={PRESETS} />
             <Button variant="outline" onClick={exportCsv} disabled={rowCount === 0}>
-              <Download /> Export CSV
+              <Download /> <span className="hidden sm:inline">Export</span> CSV
             </Button>
           </>
         }

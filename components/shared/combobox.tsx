@@ -66,12 +66,15 @@ export function Combobox({
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        className={cn("w-(--radix-popover-trigger-width) min-w-72 p-0 shadow-overlay", contentClassName)}
+        className={cn(
+          "w-(--radix-popover-trigger-width) max-w-[calc(100vw-1rem)] min-w-[min(18rem,calc(100vw-1rem))] p-0 shadow-overlay",
+          contentClassName,
+        )}
       >
         {/* Plain substring match: predictable for names and SKUs. */}
         <Command filter={(value, search) => (value.toLowerCase().includes(search.trim().toLowerCase()) ? 1 : 0)}>
           <CommandInput placeholder={searchPlaceholder} />
-          <CommandList className="scrollbar-thin max-h-72">
+          <CommandList className="scrollbar-slim max-h-[min(18rem,calc(var(--radix-popover-content-available-height)-3.5rem))]">
             <CommandEmpty>{emptyText}</CommandEmpty>
             <CommandGroup>
               {options.map((o) => (

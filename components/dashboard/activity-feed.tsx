@@ -123,8 +123,8 @@ export function ActivityFeed({ entries, lookups }: { entries: ActivityEntry[]; l
                 <Icon className="size-3.5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-medium text-foreground">{d.title}</span>
-                {d.detail && <span className="block truncate text-xs text-muted-foreground">{d.detail}</span>}
+                <span className="block text-sm font-medium text-foreground sm:truncate">{d.title}</span>
+                {d.detail && <span className="block text-xs text-muted-foreground sm:truncate">{d.detail}</span>}
               </span>
               <span className="flex shrink-0 flex-col items-end gap-0.5">
                 {d.delta !== undefined && (

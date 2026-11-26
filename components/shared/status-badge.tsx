@@ -14,10 +14,10 @@ const TONES: Record<Tone, { badge: string; dot: string }> = {
 
 type AnyStatus = StockStatus | SaleStatus | PurchaseStatus;
 
-export const STATUS_META: Record<AnyStatus, { label: string; tone: Tone }> = {
+export const STATUS_META: Record<AnyStatus, { label: string; tone: Tone; short?: string }> = {
   in_stock: { label: "In stock", tone: "success" },
   low: { label: "Low", tone: "warning" },
-  out: { label: "Out of stock", tone: "danger" },
+  out: { label: "Out of stock", tone: "danger", short: "Out" },
   draft: { label: "Draft", tone: "neutral" },
   confirmed: { label: "Confirmed", tone: "brand" },
   fulfilled: { label: "Fulfilled", tone: "success" },
@@ -46,7 +46,14 @@ export function StatusBadge({ status, className }: { status: AnyStatus; classNam
   const meta = STATUS_META[status];
   return (
     <Pill tone={meta.tone} className={className}>
-      {meta.label}
+      {meta.short ? (
+        <>
+          <span className="sm:hidden">{meta.short}</span>
+          <span className="hidden sm:inline">{meta.label}</span>
+        </>
+      ) : (
+        meta.label
+      )}
     </Pill>
   );
 }

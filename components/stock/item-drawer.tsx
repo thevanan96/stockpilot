@@ -78,7 +78,7 @@ function ItemDetail({ item, onEdit, onAdjust }: Omit<ItemDrawerProps, "item" | "
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollbar-thin">
+      <div className="flex-1 overflow-y-auto scrollbar-slim">
         <dl className="grid grid-cols-2 gap-px border-b border-border bg-border">
           <Stat label="On hand" value={formatNumber(item.quantity)} suffix={item.unit} emphasis />
           <Stat label="Minimum level" value={formatNumber(item.minLevel)} suffix={item.unit} />

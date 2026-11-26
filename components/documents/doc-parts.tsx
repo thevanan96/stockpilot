@@ -63,7 +63,7 @@ export function DocumentDrawer({
             </SheetClose>
           </div>
         </div>
-        <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5 scrollbar-thin">{children}</div>
+        <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5 scrollbar-slim">{children}</div>
         {actions && (
           <div className="flex flex-col-reverse gap-2 border-t border-border bg-muted/40 px-5 py-3.5 sm:flex-row sm:justify-end">
             {actions}

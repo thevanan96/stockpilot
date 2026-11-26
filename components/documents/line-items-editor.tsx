@@ -43,8 +43,8 @@ export function LineItemsEditor({
     keywords: [i.sku, i.category],
     meta: (
       <span className="num">
-        <span className="font-mono">{i.sku}</span>
-        <span className={cn("ml-2", i.status === "out" ? "text-danger-text" : i.status === "low" ? "text-warning-text" : "")}>
+        <span className="hidden font-mono sm:inline">{i.sku}</span>
+        <span className={cn("sm:ml-2", i.status === "out" ? "text-danger-text" : i.status === "low" ? "text-warning-text" : "")}>
           {formatNumber(i.quantity)} on hand
         </span>
       </span>
@@ -90,7 +90,7 @@ export function LineItemsEditor({
                   options={options.map((o) => ({ ...o, disabled: o.value !== line.itemId && usedIds.has(o.value) }))}
                   placeholder="Choose an item"
                   searchPlaceholder="Search by name or SKU…"
-                  contentClassName="min-w-96"
+                  contentClassName="sm:min-w-96"
                 />
                 {itemError && <p className="text-xs text-destructive">{itemError}</p>}
                 {short && item && (

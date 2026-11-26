@@ -31,15 +31,22 @@ const columns: ColumnDef<SaleRow>[] = [
     accessorKey: "number",
     header: "Invoice",
     cell: ({ row }) => (
-      <div className="whitespace-nowrap">
-        <div className="font-mono text-[13px] font-medium">{row.original.number}</div>
-        {/* Below lg the date column is hidden, so show the date here instead. */}
-        <div className="num text-xs text-muted-foreground lg:hidden">{formatDate(row.original.date)}</div>
+      <div className="min-w-0">
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <span className="font-mono text-[13px] font-medium">{row.original.number}</span>
+          <StatusBadge status={row.original.status} className="sm:hidden" />
+        </div>
+        {/* Columns hidden on smaller screens are summarised here instead. */}
+        <div className="num text-xs text-muted-foreground lg:hidden">
+          <span className="sm:hidden">{row.original.customerName} · </span>
+          <span className="whitespace-nowrap">{formatDate(row.original.date)}</span>
+        </div>
       </div>
     ),
   },
   {
     accessorKey: "customerName",
+    meta: { className: "hidden sm:table-cell" },
     header: "Customer",
     cell: ({ row }) => <EntityCell name={row.original.customerName} />,
   },
@@ -69,7 +76,7 @@ const columns: ColumnDef<SaleRow>[] = [
     header: "Status",
     cell: ({ row }) => <StatusBadge status={row.original.status} />,
     enableGlobalFilter: false,
-    meta: { className: "w-32" },
+    meta: { className: "hidden w-32 sm:table-cell" },
   },
 ];
 

@@ -38,8 +38,8 @@ export function EntityCell({ name, secondary }: { name: string; secondary?: stri
     <span className="flex min-w-0 items-center gap-2.5">
       <EntityAvatar name={name} />
       <span className="min-w-0">
-        <span className="block truncate font-medium text-foreground">{name}</span>
-        {secondary && <span className="block truncate text-xs text-muted-foreground">{secondary}</span>}
+        <span className="block font-medium text-foreground sm:truncate">{name}</span>
+        {secondary && <span className="block text-xs text-muted-foreground sm:truncate">{secondary}</span>}
       </span>
     </span>
   );

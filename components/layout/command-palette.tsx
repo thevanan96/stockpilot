@@ -54,7 +54,7 @@ export function CommandPalette() {
       {/* cmdk needs its own root inside the dialog. */}
       <Command loop>
         <CommandInput placeholder="Search pages, items, invoices, POs…" />
-        <CommandList className="scrollbar-thin max-h-[min(400px,calc(66dvh-4rem))]">
+        <CommandList className="scrollbar-slim max-h-[min(400px,calc(66dvh-4rem))]">
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Actions">
             {QUICK_ACTIONS.map((a) => (

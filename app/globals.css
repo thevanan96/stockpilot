@@ -239,27 +239,27 @@
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum", "cv11";
   }
-  .scrollbar-thin::-webkit-scrollbar {
+  .scrollbar-slim::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  .scrollbar-thin::-webkit-scrollbar-button {
+  .scrollbar-slim::-webkit-scrollbar-button {
     display: none;
   }
-  .scrollbar-thin::-webkit-scrollbar-track {
+  .scrollbar-slim::-webkit-scrollbar-track {
     background: transparent;
   }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
+  .scrollbar-slim::-webkit-scrollbar-thumb {
     border: 2px solid transparent;
     border-radius: 999px;
     background: var(--border-strong) padding-box;
   }
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  .scrollbar-slim::-webkit-scrollbar-thumb:hover {
     background: var(--subtle-foreground) padding-box;
   }
   /* Firefox: no ::-webkit-scrollbar support, use the standard properties instead. */
   @supports not selector(::-webkit-scrollbar) {
-    .scrollbar-thin {
+    .scrollbar-slim {
       scrollbar-width: thin;
       scrollbar-color: var(--border-strong) transparent;
     }

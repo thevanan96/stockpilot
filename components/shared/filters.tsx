@@ -67,7 +67,7 @@ export function SegmentedFilter<V extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="scrollbar-thin flex max-w-full items-center gap-0.5 overflow-x-auto rounded-lg bg-muted p-0.5 ring-1 ring-border ring-inset"
+      className="scrollbar-none flex max-w-full items-center gap-0.5 overflow-x-auto rounded-lg bg-muted p-0.5 ring-1 ring-border ring-inset"
     >
       {options.map((o) => {
         const active = o.value === value;
