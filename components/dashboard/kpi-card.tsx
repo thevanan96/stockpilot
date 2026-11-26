@@ -49,7 +49,7 @@ export function KpiCard({ label, icon: Icon, value, format, detail, trend, trend
             {formatPercent(trend)}
           </span>
         )}
-        <span className="truncate">{detail}</span>
+        <span>{detail}</span>
       </div>
     </Link>
   );

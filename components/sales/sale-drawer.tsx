@@ -10,7 +10,7 @@ import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { DocLines, DocMeta, DocTimeline, DocumentDrawer, SectionLabel, type TimelineStep } from "@/components/documents/doc-parts";
 import { docUnits, qtyByItem } from "@/lib/domain";
-import { formatDate, formatNumber } from "@/lib/format";
+import { formatDate, formatNumber, plural } from "@/lib/format";
 import { selectItemMap, selectItemsWithStock, selectPartyMap, selectStockLevels } from "@/lib/selectors";
 import { useInventoryStore } from "@/store/inventory-store";
 import { useRetained } from "@/hooks/use-retained";
@@ -54,7 +54,7 @@ export function SaleDrawer({ sale: current, onClose }: { sale?: SalesOrder; onCl
       return;
     }
     toast.success(`${sale.number} fulfilled`, {
-      description: `${formatNumber(docUnits(sale.lines))} units shipped to ${customer?.name ?? "customer"}.`,
+      description: `${plural(docUnits(sale.lines), "unit")} shipped to ${customer?.name ?? "customer"}.`,
     });
     // Surface any item that this shipment pushed to or below its minimum level.
     const state = useInventoryStore.getState();
@@ -64,6 +64,7 @@ export function SaleDrawer({ sale: current, onClose }: { sale?: SalesOrder; onCl
         toast.warning(`${item.name} is ${item.status === "out" ? "out of stock" : "running low"}`, {
           description: `${formatNumber(item.quantity)} ${item.unit} left · minimum ${formatNumber(item.minLevel)}`,
           action: { label: "Create PO", onClick: () => router.push(`/purchases/new?item=${item.id}`) },
+          duration: 8000,
         });
       }
     }
@@ -160,7 +161,7 @@ export function SaleDrawer({ sale: current, onClose }: { sale?: SalesOrder; onCl
         open={confirm === "fulfil"}
         onOpenChange={(o) => !o && setConfirm(null)}
         title={`Fulfil ${sale.number}?`}
-        description={`${formatNumber(docUnits(sale.lines))} units across ${sale.lines.length} items will be deducted from stock and recorded in the ledger. Fulfilled invoices can't be cancelled.`}
+        description={`${plural(docUnits(sale.lines), "unit")} across ${plural(sale.lines.length, "item")} will be deducted from stock and recorded in the ledger. Fulfilled invoices can't be cancelled.`}
         confirmLabel="Fulfil and ship"
         onConfirm={fulfil}
       />

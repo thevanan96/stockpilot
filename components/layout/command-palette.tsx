@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Moon, Package, Plus, Receipt, Sun, Truck } from "lucide-react";
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -50,37 +51,40 @@ export function CommandPalette() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen} title="Command palette" description="Search pages, items and documents">
-      <CommandInput placeholder="Search pages, items, invoices, POs…" />
-      <CommandList className="scrollbar-thin max-h-[min(420px,60dvh)]">
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Actions">
-          {QUICK_ACTIONS.map((a) => (
-            <CommandItem key={a.href} onSelect={() => go(a.href)}>
-              <Plus />
-              {a.label}
+      {/* cmdk needs its own root inside the dialog. */}
+      <Command loop>
+        <CommandInput placeholder="Search pages, items, invoices, POs…" />
+        <CommandList className="scrollbar-thin max-h-[min(400px,calc(66dvh-4rem))]">
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Actions">
+            {QUICK_ACTIONS.map((a) => (
+              <CommandItem key={a.href} onSelect={() => go(a.href)}>
+                <Plus />
+                {a.label}
+              </CommandItem>
+            ))}
+            <CommandItem
+              onSelect={() => {
+                setOpen(false);
+                setTheme(resolvedTheme === "dark" ? "light" : "dark");
+              }}
+            >
+              {resolvedTheme === "dark" ? <Sun /> : <Moon />}
+              Switch to {resolvedTheme === "dark" ? "light" : "dark"} theme
             </CommandItem>
-          ))}
-          <CommandItem
-            onSelect={() => {
-              setOpen(false);
-              setTheme(resolvedTheme === "dark" ? "light" : "dark");
-            }}
-          >
-            {resolvedTheme === "dark" ? <Sun /> : <Moon />}
-            Switch to {resolvedTheme === "dark" ? "light" : "dark"} theme
-          </CommandItem>
-        </CommandGroup>
-        <CommandSeparator />
-        <CommandGroup heading="Go to">
-          {NAV_SECTIONS.flatMap((s) => s.items).map((item) => (
-            <CommandItem key={item.href} onSelect={() => go(item.href)}>
-              <item.icon />
-              {item.label}
-            </CommandItem>
-          ))}
-        </CommandGroup>
-        {open && <DataResults onSelect={go} />}
-      </CommandList>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Go to">
+            {NAV_SECTIONS.flatMap((s) => s.items).map((item) => (
+              <CommandItem key={item.href} onSelect={() => go(item.href)}>
+                <item.icon />
+                {item.label}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          {open && <DataResults onSelect={go} />}
+        </CommandList>
+      </Command>
     </CommandDialog>
   );
 }

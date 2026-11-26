@@ -44,7 +44,7 @@ export function DocumentFormLayout({
         }
       />
       <PageBody>
-        <form onSubmit={onSubmit} noValidate className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <form onSubmit={onSubmit} noValidate className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
           <div className="space-y-6">{children}</div>
           <aside className="lg:sticky lg:top-6">{summary}</aside>
         </form>

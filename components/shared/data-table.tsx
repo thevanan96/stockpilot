@@ -77,7 +77,7 @@ export function DataTable<T>({
   return (
     <div className={cn("overflow-hidden rounded-xl border border-border bg-card shadow-card", className)}>
       <div className="max-h-[min(640px,calc(100dvh-13rem))] overflow-auto scrollbar-thin">
-        <table className="w-full border-separate md:min-w-[640px] border-spacing-0 text-sm">
+        <table className="w-full border-separate border-spacing-0 text-sm">
           <thead>
             {table.getHeaderGroups().map((group) => (
               <tr key={group.id}>

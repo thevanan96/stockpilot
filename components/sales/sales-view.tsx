@@ -30,7 +30,13 @@ const columns: ColumnDef<SaleRow>[] = [
   {
     accessorKey: "number",
     header: "Invoice",
-    cell: ({ getValue }) => <span className="font-mono text-[13px] font-medium whitespace-nowrap">{getValue<string>()}</span>,
+    cell: ({ row }) => (
+      <div className="whitespace-nowrap">
+        <div className="font-mono text-[13px] font-medium">{row.original.number}</div>
+        {/* Below lg the date column is hidden, so show the date here instead. */}
+        <div className="num text-xs text-muted-foreground lg:hidden">{formatDate(row.original.date)}</div>
+      </div>
+    ),
   },
   {
     accessorKey: "customerName",
@@ -42,14 +48,14 @@ const columns: ColumnDef<SaleRow>[] = [
     header: "Date",
     cell: ({ getValue }) => <span className="num whitespace-nowrap text-muted-foreground">{formatDate(getValue<string>())}</span>,
     enableGlobalFilter: false,
-    meta: { className: "hidden md:table-cell" },
+    meta: { className: "hidden lg:table-cell" },
   },
   {
     accessorKey: "units",
     header: "Units",
     cell: ({ getValue }) => <span className="text-muted-foreground">{formatNumber(getValue<number>())}</span>,
     enableGlobalFilter: false,
-    meta: { align: "right", className: "hidden lg:table-cell" },
+    meta: { align: "right", className: "hidden xl:table-cell" },
   },
   {
     accessorKey: "total",

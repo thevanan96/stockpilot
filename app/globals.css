@@ -223,6 +223,9 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+  [data-sonner-toaster] {
+    pointer-events: auto;
+  }
   ::selection {
     background: var(--brand-soft);
   }
@@ -236,9 +239,36 @@
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum", "cv11";
   }
-  .scrollbar-thin {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-strong) transparent;
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-button {
+    display: none;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: var(--border-strong) padding-box;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: var(--subtle-foreground) padding-box;
+  }
+  /* Firefox: no ::-webkit-scrollbar support, use the standard properties instead. */
+  @supports not selector(::-webkit-scrollbar) {
+    .scrollbar-thin {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-strong) transparent;
+    }
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
 

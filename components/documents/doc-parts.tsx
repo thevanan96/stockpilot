@@ -6,7 +6,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle } from "@
 import { EntityAvatar } from "@/components/shared/entity-avatar";
 import { docTotal, docUnits } from "@/lib/domain";
 import { formatDateTime, formatINR, formatNumber } from "@/lib/format";
-import { cn } from "@/lib/utils";
+import { cn, ignoreToastInteractions } from "@/lib/utils";
 import type { Item, LineItem } from "@/types";
 
 /* ------------------------------ Drawer shell ------------------------------ */
@@ -38,6 +38,7 @@ export function DocumentDrawer({
         side="right"
         showCloseButton={false}
         className="w-full gap-0 p-0 data-[side=right]:w-full data-[side=right]:sm:max-w-[560px]"
+        onInteractOutside={ignoreToastInteractions}
       >
         <div className="border-b border-border px-5 pt-5 pb-4">
           <div className="flex items-start justify-between gap-4">

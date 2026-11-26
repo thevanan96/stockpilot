@@ -21,7 +21,7 @@ interface LineItemsEditorProps {
   rootError?: string;
 }
 
-const GRID = "sm:grid sm:grid-cols-[minmax(0,1fr)_88px_120px_112px_32px] sm:items-start sm:gap-3";
+const GRID = "sm:grid sm:grid-cols-[minmax(0,1fr)_76px_112px_100px_28px] sm:items-start sm:gap-2.5";
 
 export function LineItemsEditor({
   value,
@@ -78,7 +78,7 @@ export function LineItemsEditor({
                 GRID,
               )}
             >
-              <div className="min-w-0 space-y-1">
+              <div className="min-w-0 space-y-1 pr-9 sm:pr-0">
                 <Combobox
                   id={`line-${index}-item`}
                   value={line.itemId}

@@ -9,7 +9,7 @@ import { suggestedReorderQty } from "@/lib/domain";
 import { formatDateTime, formatDelta, formatINR, formatNumber } from "@/lib/format";
 import { selectItemHistory, type HistoryRow } from "@/lib/selectors";
 import { useInventoryStore } from "@/store/inventory-store";
-import { cn } from "@/lib/utils";
+import { cn, ignoreToastInteractions } from "@/lib/utils";
 import type { ItemWithStock, MovementType } from "@/types";
 import { useRetained } from "@/hooks/use-retained";
 
@@ -24,7 +24,12 @@ export function ItemDrawer({ item: current, onClose, onEdit, onAdjust }: ItemDra
   const item = useRetained(!!current, current);
   return (
     <Sheet open={!!current} onOpenChange={(o) => !o && onClose()}>
-      <SheetContent side="right" showCloseButton={false} className="w-full gap-0 p-0 data-[side=right]:w-full data-[side=right]:sm:max-w-[520px]">
+      <SheetContent
+        side="right"
+        showCloseButton={false}
+        className="w-full gap-0 p-0 data-[side=right]:w-full data-[side=right]:sm:max-w-[520px]"
+        onInteractOutside={ignoreToastInteractions}
+      >
         {item && <ItemDetail item={item} onEdit={onEdit} onAdjust={onAdjust} />}
       </SheetContent>
     </Sheet>

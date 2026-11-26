@@ -82,11 +82,11 @@ export function SidebarContent({ rail = false, onNavigate, showCollapseToggle }:
       </RailTooltip>
 
       {/* Navigation */}
-      <nav aria-label="Main" className="flex flex-1 flex-col gap-5 overflow-y-auto scrollbar-thin">
+      <nav aria-label="Main" className="scrollbar-none flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto [@media(max-height:640px)]:gap-2">
         {NAV_SECTIONS.map((section, i) => (
           <div key={section.label ?? i} className="flex flex-col gap-0.5">
             {section.label && !rail && (
-              <div className="px-2.5 pb-1 text-[11px] font-medium tracking-wide text-subtle-foreground uppercase">
+              <div className="px-2.5 pb-1 text-[11px] font-medium tracking-wide text-subtle-foreground uppercase [@media(max-height:640px)]:sr-only">
                 {section.label}
               </div>
             )}

@@ -65,6 +65,11 @@ export function formatRelative(iso: string | Date) {
   return format(d, "d MMM");
 }
 
+/** "1 item" / "3 items" (with en-IN digit grouping). */
+export function plural(count: number, singular: string, pluralForm = `${singular}s`) {
+  return `${num.format(count)} ${count === 1 ? singular : pluralForm}`;
+}
+
 /** Two-letter initials for avatar chips. */
 export function initials(name: string) {
   const words = name.replace(/[^\p{L}\p{N}\s]/gu, "").split(/\s+/).filter(Boolean);

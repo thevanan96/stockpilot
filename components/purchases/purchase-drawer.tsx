@@ -10,7 +10,7 @@ import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { Pill, StatusBadge } from "@/components/shared/status-badge";
 import { DocLines, DocMeta, DocTimeline, DocumentDrawer, SectionLabel, type TimelineStep } from "@/components/documents/doc-parts";
 import { docUnits } from "@/lib/domain";
-import { formatDate, formatNumber } from "@/lib/format";
+import { formatDate, plural } from "@/lib/format";
 import { selectItemMap, selectPartyMap } from "@/lib/selectors";
 import { useInventoryStore } from "@/store/inventory-store";
 import { useRetained } from "@/hooks/use-retained";
@@ -48,8 +48,9 @@ export function PurchaseDrawer({ purchase: current, onClose }: { purchase?: Purc
     const result = receivePurchase(purchase.id);
     if (!result.ok) return toast.error(result.error);
     toast.success(`${purchase.number} received`, {
-      description: `+${formatNumber(units)} units added to stock across ${purchase.lines.length} items.`,
+      description: `+${plural(units, "unit")} added to stock across ${plural(purchase.lines.length, "item")}.`,
       action: { label: "View stock", onClick: () => router.push("/stock") },
+      duration: 8000,
     });
   };
   const cancel = () => {
@@ -118,7 +119,7 @@ export function PurchaseDrawer({ purchase: current, onClose }: { purchase?: Purc
         open={confirm === "receive"}
         onOpenChange={(o) => !o && setConfirm(null)}
         title={`Receive ${purchase.number}?`}
-        description={`This adds ${formatNumber(units)} units across ${purchase.lines.length} items to stock and records each line in the stock ledger. A PO can only be received once.`}
+        description={`This adds ${plural(units, "unit")} across ${plural(purchase.lines.length, "item")} to stock and records each line in the stock ledger. A PO can only be received once.`}
         confirmLabel="Receive into stock"
         onConfirm={receive}
       />

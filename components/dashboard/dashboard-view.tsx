@@ -46,7 +46,7 @@ function Dashboard() {
   const kpis = selectKpis(items, movements, sales, purchases);
   const lowStock = selectLowStock(items, movements);
   const monthly = selectMonthlyTotals(sales, purchases, 6);
-  const activity = selectActivity(movements, events).slice(0, 8);
+  const activity = selectActivity(movements, events).slice(0, 6);
   const categories = selectStockByCategory(items, movements);
   const now = new Date();
 

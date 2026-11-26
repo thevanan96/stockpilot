@@ -69,7 +69,7 @@ function buildColumns(kind: Kind): ColumnDef<PartyRow>[] {
           {row.original.email}
         </a>
       ),
-      meta: { className: "hidden xl:table-cell" },
+      meta: { className: "hidden 2xl:table-cell" },
     },
     {
       accessorKey: "phone",

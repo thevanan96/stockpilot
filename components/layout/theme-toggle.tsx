@@ -47,19 +47,19 @@ export function ThemeToggle({ className }: { className?: string }) {
   );
 }
 
-/** Single icon button that cycles light → dark → system (used in compact chrome). */
+/** Single icon button that toggles light / dark (used in compact chrome). */
 export function ThemeCycleButton({ className }: { className?: string }) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const mounted = useSyncExternalStore(noop, () => true, () => false);
-  const next = theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
-  const Icon = !mounted ? Sun : resolvedTheme === "dark" ? Moon : Sun;
+  const isDark = mounted && resolvedTheme === "dark";
+  const next = isDark ? "light" : "dark";
+  const Icon = isDark ? Moon : Sun;
 
   return (
     <button
       type="button"
       onClick={() => setTheme(next)}
       aria-label={`Switch to ${next} theme`}
-      title={`Theme: ${mounted ? theme : "system"}`}
       className={cn(
         "flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 outline-none hover:bg-sidebar-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
         className,
